@@ -15,6 +15,7 @@
 from telethon import TelegramClient, events
 from decouple import config
 import logging
+import re
 from telethon.sessions import StringSession
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.WARNING)
@@ -40,14 +41,16 @@ except Exception as ap:
 
 @BotzHubUser.on(events.NewMessage(incoming=True, chats=FROM))
 async def sender_bH(event):
-    for i in TO:
-        try:
-            await BotzHubUser.send_message(
-                i,
-                event.message
-            )
-        except Exception as e:
-            print(e)
+    x = re.search("Balance: 1.07", event.message)
+    if(x) :
+        for i in TO:
+            try:
+                await BotzHubUser.send_message(
+                    i,
+                    event.message
+                )
+            except Exception as e:
+                print(e)
 
 print("Bot has started.")
 BotzHubUser.run_until_disconnected()
