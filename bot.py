@@ -41,8 +41,8 @@ except Exception as ap:
 
 @BotzHubUser.on(events.NewMessage(incoming=True, chats=FROM))
 async def sender_bH(event):
-    print(event.message)
-    x = re.search("Balance: 1.07", event.message)
+#     print(event.message.message)
+    x = re.search("Balance: 1.07", event.message.message)
     if x:
         for i in TO:
             try:
